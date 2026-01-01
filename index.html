@@ -148,7 +148,7 @@
     }
 
     .subtitle {
-        font-size: 8px; color: var(--gold-light); font-weight: 600; margin-top: 10px;
+        font-size: 7px; color: var(--gold-light); font-weight: 600; margin-top: 10px;
         letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.9;
         transition: opacity 0.5s ease, transform 0.5s ease;
         text-shadow: 0 0 10px rgba(0,0,0,0.8);
@@ -1025,7 +1025,8 @@ function renderPosts() {
 
         const safeText = escapeHTML(p.text || '');
         // new: wrap text in a bidi-aware container so Arabic renders RTL and mixed content stays correct
-        const safeTextWithBidi = buildBidiSpanFor(safeText);
+        const firstLineEscaped = (safeText.split(/\r?\n/)[0] || '').trim();
+        const safeTextWithBidi = buildBidiSpanFor(((firstLineEscaped.split(/\s+/).slice(0,8).join(' ')) || firstLineEscaped) + '...');
 
         const safeTime = escapeHTML(timeAgo(Number(p.date)));
         const safeViews = escapeHTML(String(Number(p.views || 0)));
@@ -1342,7 +1343,7 @@ document.getElementById('brandingLayer')?.addEventListener('keydown', (e) => {
                     custom.style.textTransform = 'uppercase';
                     custom.style.letterSpacing = '1.5px';
                     custom.style.marginTop = '10px';
-                    custom.style.fontSize = '10px';
+                    custom.style.fontSize = '9px';
                     custom.style.fontWeight = '700';
                     custom.style.opacity = '0.95';
 
